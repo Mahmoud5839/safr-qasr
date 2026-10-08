@@ -14,54 +14,83 @@ function Navbar() {
 
   const navLinks = [
     { name: "الرئيسية", href: "/" },
-    { name: "صلاة القصر", href: "#qasr" },
-    { name: "الجمع", href: "#jam" },
-    { name: "دليل المسافر", href: "guide" },
-    { name: "المصادر", href: "sources" },
+    { name: "صلاة القصر", href: "/#qasr" },
+    { name: "الجمع", href: "/#jam" },
+    { name: "دليل المسافر", href: "/guide" },
+    { name: "المصادر", href: "/sources" },
   ];
 
   const toggleDarkMode = () => {
-    setIsDark(!isDark);
+    setIsDark((prev) => !prev);
     document.documentElement.classList.toggle("dark");
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className="fixed top-0 right-0 left-0 z-50">
-      <nav className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav className="mx-auto mt-3 w-full max-w-7xl px-3 sm:mt-4 sm:px-6 lg:px-8">
         <div
           className="
-            flex h-16 items-center justify-between
-            rounded-2xl border border-white/20
-            bg-white/80 px-4 shadow-lg shadow-black/5
+            relative
+            flex min-h-14 items-center justify-between
+            rounded-2xl
+            border border-white/20
+            bg-white/85
+            px-3 py-2
+            shadow-lg shadow-black/5
             backdrop-blur-xl
-            dark:border-white/10 dark:bg-slate-900/80
+            sm:min-h-16 sm:px-4
+            dark:border-white/10
+            dark:bg-slate-900/85
           "
         >
           {/* Logo */}
           <a
-            href="#home"
-            className="group flex items-center gap-3"
+            href="/"
+            onClick={closeMenu}
+            className="group flex min-w-0 items-center gap-2.5 sm:gap-3"
           >
             <div
               className="
-                flex h-11 w-11 items-center justify-center
+                flex h-10 w-10 shrink-0
+                items-center justify-center
                 rounded-xl
                 bg-emerald-900
                 text-white
                 shadow-md
                 transition-transform
                 group-hover:scale-105
+                sm:h-11 sm:w-11
               "
             >
-              <Compass size={23} strokeWidth={1.8} />
+              <Compass size={22} strokeWidth={1.8} />
             </div>
 
-            <div className="hidden sm:block">
-              <h1 className="text-lg font-bold leading-tight text-emerald-950 dark:text-white">
+            <div className="min-w-0">
+              <h1
+                className="
+                  truncate
+                  text-sm font-bold leading-tight
+                  text-emerald-950
+                  sm:text-lg
+                  dark:text-white
+                "
+              >
                 زاد المسافر
               </h1>
 
-              <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+              <p
+                className="
+                  hidden text-[10px] font-medium
+                  text-slate-500
+                  xs:block
+                  sm:text-xs
+                  dark:text-slate-400
+                "
+              >
                 دليل صلاة المسافر
               </p>
             </div>
@@ -74,12 +103,14 @@ function Navbar() {
                 key={link.name}
                 href={link.href}
                 className="
-                  rounded-xl px-4 py-2
+                  rounded-xl
+                  px-3 py-2
                   text-sm font-medium
                   text-slate-600
                   transition
                   hover:bg-emerald-50
                   hover:text-emerald-900
+                  lg:px-4
                   dark:text-slate-300
                   dark:hover:bg-emerald-950
                   dark:hover:text-emerald-300
@@ -90,11 +121,14 @@ function Navbar() {
             ))}
           </div>
 
-          {/* Actions */}
+          {/* Desktop Actions */}
           <div className="hidden items-center gap-2 md:flex">
             <button
+              type="button"
               onClick={toggleDarkMode}
-              aria-label="تغيير الوضع"
+              aria-label={
+                isDark ? "تفعيل الوضع النهاري" : "تفعيل الوضع الليلي"
+              }
               className="
                 flex h-10 w-10 items-center justify-center
                 rounded-xl
@@ -105,11 +139,7 @@ function Navbar() {
                 dark:hover:bg-slate-800
               "
             >
-              {isDark ? (
-                <Sun size={19} />
-              ) : (
-                <Moon size={19} />
-              )}
+              {isDark ? <Sun size={19} /> : <Moon size={19} />}
             </button>
 
             <a
@@ -118,13 +148,14 @@ function Navbar() {
                 flex items-center gap-2
                 rounded-xl
                 bg-emerald-900
-                px-5 py-2.5
+                px-4 py-2.5
                 text-sm font-semibold
                 text-white
                 shadow-md shadow-emerald-900/10
                 transition
                 hover:bg-emerald-800
                 hover:shadow-lg
+                lg:px-5
               "
             >
               <BookOpen size={17} />
@@ -134,35 +165,43 @@ function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="فتح القائمة"
+            type="button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label={isMenuOpen ? "إغلاق القائمة" : "فتح القائمة"}
+            aria-expanded={isMenuOpen}
             className="
-              flex h-10 w-10 items-center justify-center
+              flex h-10 w-10 shrink-0
+              items-center justify-center
               rounded-xl
               text-slate-700
+              transition
               hover:bg-slate-100
               md:hidden
               dark:text-slate-200
               dark:hover:bg-slate-800
             "
           >
-            {isMenuOpen ? (
-              <X size={23} />
-            ) : (
-              <Menu size={23} />
-            )}
+            {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
+        <div
+          className={[
+            "overflow-hidden transition-all duration-200 md:hidden",
+            isMenuOpen
+              ? "mt-2 max-h-128 opacity-100"
+              : "pointer-events-none max-h-0 opacity-0",
+          ].join(" ")}
+        >
           <div
             className="
-              mt-2 overflow-hidden rounded-2xl
+              rounded-2xl
               border border-white/20
-              bg-white/95 p-3 shadow-xl
+              bg-white/95
+              p-3
+              shadow-xl
               backdrop-blur-xl
-              md:hidden
               dark:border-white/10
               dark:bg-slate-900/95
             "
@@ -172,10 +211,12 @@ function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={closeMenu}
                   className="
-                    rounded-xl px-4 py-3
-                    text-sm font-medium
+                    min-h-11
+                    rounded-xl
+                    px-4 py-3
+                    text-sm font-semibold
                     text-slate-700
                     transition
                     hover:bg-emerald-50
@@ -191,13 +232,18 @@ function Navbar() {
 
               <div className="my-2 h-px bg-slate-100 dark:bg-slate-800" />
 
+              {/* Dark Mode */}
               <button
+                type="button"
                 onClick={toggleDarkMode}
                 className="
-                  flex items-center justify-between
-                  rounded-xl px-4 py-3
-                  text-sm font-medium
+                  flex min-h-11
+                  items-center justify-between
+                  rounded-xl
+                  px-4 py-3
+                  text-sm font-semibold
                   text-slate-700
+                  transition
                   hover:bg-slate-50
                   dark:text-slate-200
                   dark:hover:bg-slate-800
@@ -205,24 +251,25 @@ function Navbar() {
               >
                 <span>الوضع الليلي</span>
 
-                {isDark ? (
-                  <Sun size={18} />
-                ) : (
-                  <Moon size={18} />
-                )}
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
+              {/* CTA */}
               <a
                 href="travel-checker"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className="
-                  mt-1 flex items-center
-                  justify-center gap-2
+                  mt-1
+                  flex min-h-11
+                  items-center justify-center
+                  gap-2
                   rounded-xl
                   bg-emerald-900
                   px-4 py-3
                   text-sm font-semibold
                   text-white
+                  transition
+                  hover:bg-emerald-800
                 "
               >
                 <BookOpen size={17} />
@@ -230,7 +277,7 @@ function Navbar() {
               </a>
             </div>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );

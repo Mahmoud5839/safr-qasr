@@ -12,7 +12,6 @@ import {
   Timer,
 } from "lucide-react";
 
-
 const sections = [
   {
     id: "what-is-travel",
@@ -45,7 +44,7 @@ const sections = [
     ],
     highlight: "83 كم تقريبًا",
     note:
-      "هذا هو التقدير المعتمد في السياسة الافتراضية  لموقعنا، وليس ادعاءً بأن جميع المذاهب متفقة عليه.",
+      "هذا هو التقدير المعتمد في السياسة الافتراضية لموقعنا، وليس ادعاءً بأن جميع المذاهب متفقة عليه.",
     source: "دار الإفتاء المصرية – فتوى رقم 8831",
     sourceUrl:
       "https://www.dar-alifta.org/ar/fatwa/details/22385/",
@@ -212,40 +211,42 @@ function GuideSection({ section, index }) {
         rounded-3xl
         border border-slate-200
         bg-white
-        p-6
+        p-5
         shadow-sm
         transition
         hover:shadow-md
+        sm:p-6
         dark:border-slate-800
         dark:bg-slate-900
       "
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
         <div
           className="
-            flex h-12 w-12 shrink-0 items-center justify-center
+            flex h-11 w-11 shrink-0 items-center justify-center
             rounded-2xl
             bg-emerald-50
             text-emerald-700
+            sm:h-12 sm:w-12
             dark:bg-emerald-950/40
             dark:text-emerald-400
           "
         >
-          <Icon size={23} />
+          <Icon size={21} className="sm:h-[23px] sm:w-[23px]" />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold text-slate-400">
+          <div className="mb-2 flex flex-wrap items-start gap-2">
+            <span className="pt-1 text-xs font-bold text-slate-400">
               {String(index + 1).padStart(2, "0")}
             </span>
 
-            <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">
+            <h2 className="text-lg font-extrabold leading-8 text-slate-900 sm:text-xl dark:text-white">
               {section.title}
             </h2>
           </div>
 
-          <p className="leading-8 text-slate-600 dark:text-slate-300">
+          <p className="text-sm leading-7 text-slate-600 sm:text-base sm:leading-8 dark:text-slate-300">
             {section.description}
           </p>
         </div>
@@ -254,42 +255,51 @@ function GuideSection({ section, index }) {
       {section.highlight && (
         <div
           className="
-            my-6 rounded-2xl border
+            my-5 rounded-2xl border
             border-emerald-200
             bg-emerald-50
-            p-5 text-center
+            p-4 text-center
+            sm:my-6 sm:p-5
             dark:border-emerald-900
             dark:bg-emerald-950/30
           "
         >
-          <div className="text-3xl font-black text-emerald-700 dark:text-emerald-400">
+          <div className="text-2xl font-black text-emerald-700 sm:text-3xl dark:text-emerald-400">
             {section.highlight}
           </div>
-          <div className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+
+          <div className="mt-2 text-xs leading-6 text-slate-500 sm:text-sm sm:leading-7 dark:text-slate-400">
             وفق الاختيار المعتمد للمسافة من عدة مصادر فقهية، وليس ادعاءً بأن جميع المذاهب متفقة عليه.
           </div>
         </div>
       )}
 
       {section.points && (
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-5 space-y-3 sm:mt-6">
           {section.points.map((point) => (
             <li
               key={point}
-              className="flex gap-3 leading-8 text-slate-700 dark:text-slate-200"
+              className="
+                flex items-start gap-2.5
+                text-sm leading-7
+                text-slate-700
+                sm:gap-3 sm:text-base sm:leading-8
+                dark:text-slate-200
+              "
             >
               <CheckCircle2
-                size={19}
+                size={18}
                 className="mt-1 shrink-0 text-emerald-600"
               />
-              <span>{point}</span>
+
+              <span className="min-w-0">{point}</span>
             </li>
           ))}
         </ul>
       )}
 
       {section.comparison && (
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="mt-5 grid gap-4 sm:mt-6 md:grid-cols-2">
           {section.comparison.map((item) => (
             <div
               key={item.title}
@@ -297,7 +307,8 @@ function GuideSection({ section, index }) {
                 rounded-2xl
                 border border-slate-200
                 bg-slate-50
-                p-5
+                p-4
+                sm:p-5
                 dark:border-slate-700
                 dark:bg-slate-800/60
               "
@@ -306,11 +317,11 @@ function GuideSection({ section, index }) {
                 {item.title}
               </h3>
 
-              <p className="mt-2 leading-7 text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base dark:text-slate-300">
                 {item.text}
               </p>
 
-              <div className="mt-3 rounded-xl bg-white p-3 text-sm font-semibold text-emerald-700 dark:bg-slate-900 dark:text-emerald-400">
+              <div className="mt-3 rounded-xl bg-white p-3 text-sm font-semibold leading-6 text-emerald-700 dark:bg-slate-900 dark:text-emerald-400">
                 مثال: {item.example}
               </div>
             </div>
@@ -321,16 +332,17 @@ function GuideSection({ section, index }) {
       {section.note && (
         <div
           className="
-            mt-6
+            mt-5
             rounded-2xl
             border-r-4
             border-amber-400
             bg-amber-50
             p-4
+            sm:mt-6
             dark:bg-amber-950/20
           "
         >
-          <div className="mb-1 font-bold text-amber-800 dark:text-amber-400">
+          <div className="mb-1 text-sm font-bold text-amber-800 dark:text-amber-400">
             تنبيه
           </div>
 
@@ -341,8 +353,16 @@ function GuideSection({ section, index }) {
       )}
 
       {section.source && (
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
-          <div className="text-sm text-slate-500 dark:text-slate-400">
+        <div
+          className="
+            mt-5 flex flex-col gap-3
+            border-t border-slate-100
+            pt-5
+            sm:mt-6 sm:flex-row sm:items-center sm:justify-between
+            dark:border-slate-800
+          "
+        >
+          <div className="text-sm leading-6 text-slate-500 dark:text-slate-400">
             المصدر:{" "}
             <span className="font-bold text-slate-700 dark:text-slate-200">
               {section.source}
@@ -355,7 +375,9 @@ function GuideSection({ section, index }) {
               target="_blank"
               rel="noreferrer"
               className="
-                inline-flex items-center gap-2
+                inline-flex
+                w-fit
+                items-center gap-2
                 text-sm font-bold
                 text-emerald-700
                 hover:text-emerald-800
@@ -378,36 +400,50 @@ function Guide() {
       dir="rtl"
       className="
         min-h-screen
+        overflow-x-hidden
         bg-[#f8f7f2]
         text-slate-900
         dark:bg-slate-950
         dark:text-white
       "
     >
-      <main className="mx-auto max-w-6xl pb-20 pt-30 sm:px-6 lg:px-8">
-        <Navbar />
+      <Navbar />
 
+      <main
+        className="
+          mx-auto
+          max-w-6xl
+          px-4
+          pb-16
+          pt-28
+          sm:px-6
+          sm:pb-20
+          sm:pt-32
+          lg:px-8
+        "
+      >
         {/* Header */}
-        <section className="mb-10 text-center">
+        <section className="mb-8 text-center sm:mb-10">
           <div
             className="
-              mx-auto mb-5 flex h-16 w-16
+              mx-auto mb-4 flex h-14 w-14
               items-center justify-center
-              rounded-3xl
+              rounded-2xl
               bg-emerald-100
               text-emerald-700
+              sm:mb-5 sm:h-16 sm:w-16 sm:rounded-3xl
               dark:bg-emerald-950/50
               dark:text-emerald-400
             "
           >
-            <BookOpen size={30} />
+            <BookOpen size={27} className="sm:h-[30px] sm:w-[30px]" />
           </div>
 
           <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
             دليل المسافر
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:mt-4 sm:text-base sm:leading-8 dark:text-slate-300">
             دليلك المختصر لفهم أحكام القصر والجمع وبعض أهم أحكام السفر،
             مع توضيح المسائل التي يوجد فيها خلاف فقهي.
           </p>
@@ -416,26 +452,27 @@ function Guide() {
         {/* Important notice */}
         <section
           className="
-            mb-10 rounded-3xl
+            mb-8 rounded-3xl
             border border-emerald-200
             bg-emerald-50
-            p-6
+            p-5
+            sm:mb-10 sm:p-6
             dark:border-emerald-900
             dark:bg-emerald-950/20
           "
         >
-          <div className="flex gap-4">
+          <div className="flex items-start gap-3 sm:gap-4">
             <ShieldCheck
-              size={25}
-              className="mt-1 shrink-0 text-emerald-700 dark:text-emerald-400"
+              size={23}
+              className="mt-1 shrink-0 text-emerald-700 sm:h-[25px] sm:w-[25px] dark:text-emerald-400"
             />
 
-            <div>
+            <div className="min-w-0">
               <h2 className="font-extrabold text-emerald-900 dark:text-emerald-300">
                 كيف تستخدم هذا الدليل؟
               </h2>
 
-              <p className="mt-2 leading-8 text-emerald-900/80 dark:text-emerald-200/80">
+              <p className="mt-2 text-sm leading-7 text-emerald-900/80 sm:text-base sm:leading-8 dark:text-emerald-200/80">
                 هذا الدليل تعليمي وإرشادي. عند وجود خلاف فقهي، نوضح وجود
                 الخلاف بدل تقديم المسألة على أنها محل اتفاق. وفي الحالات
                 الخاصة أو المعقدة، يُنصح بالرجوع إلى أهل العلم.
@@ -447,16 +484,19 @@ function Guide() {
         {/* Quick navigation */}
         <nav
           className="
-            mb-10 rounded-3xl
+            mb-8 rounded-3xl
             border border-slate-200
             bg-white
-            p-5
+            p-4
             shadow-sm
+            sm:mb-10 sm:p-5
             dark:border-slate-800
             dark:bg-slate-900
           "
         >
-          <h2 className="mb-4 font-extrabold">محتويات الدليل</h2>
+          <h2 className="mb-4 font-extrabold">
+            محتويات الدليل
+          </h2>
 
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {sections.map((section, index) => (
@@ -466,12 +506,14 @@ function Guide() {
                 className="
                   rounded-xl
                   bg-slate-50
-                  px-4 py-3
+                  px-3 py-3
                   text-sm font-semibold
+                  leading-6
                   text-slate-700
                   transition
                   hover:bg-emerald-50
                   hover:text-emerald-700
+                  sm:px-4
                   dark:bg-slate-800
                   dark:text-slate-200
                   dark:hover:bg-emerald-950/40
@@ -485,7 +527,7 @@ function Guide() {
         </nav>
 
         {/* Guide sections */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {sections.map((section, index) => (
             <GuideSection
               key={section.id}
@@ -498,18 +540,19 @@ function Guide() {
         {/* Final CTA */}
         <section
           className="
-            mt-10 rounded-3xl
+            mt-8 rounded-3xl
             bg-slate-900
-            p-8 text-center
+            p-6 text-center
             text-white
+            sm:mt-10 sm:p-8
             dark:bg-slate-900
           "
         >
-          <h2 className="text-2xl font-black">
+          <h2 className="text-xl font-black sm:text-2xl">
             تريد معرفة الحكم في حالتك؟
           </h2>
 
-          <p className="mx-auto mt-3 max-w-xl leading-8 text-slate-300">
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
             استخدم أداة التحقق وأجب عن الأسئلة المتعلقة بسفرك لمعرفة النتيجة
             وفق السياسة الفقهية المعتمدة داخل موقعنا.
           </p>
@@ -517,8 +560,8 @@ function Guide() {
           <a
             href="travel-checker"
             className="
-              mt-6 inline-flex
-              items-center justify-center
+              mt-5 inline-flex
+              w-full items-center justify-center
               rounded-xl
               bg-emerald-600
               px-6 py-3
@@ -526,10 +569,11 @@ function Guide() {
               text-white
               transition
               hover:bg-emerald-700
+              sm:mt-6 sm:w-auto
             "
           >
             ابدأ التحقق الآن
-          </a> 
+          </a>
         </section>
       </main>
     </div>

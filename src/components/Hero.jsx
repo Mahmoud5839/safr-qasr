@@ -13,7 +13,7 @@ function Hero() {
         relative min-h-screen
         overflow-hidden
         bg-[#f8f7f2]
-        pt-28
+        pt-24 sm:pt-28
         dark:bg-slate-950
       "
     >
@@ -21,20 +21,24 @@ function Hero() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className="
-            absolute -right-40 top-20
-            h-96 w-96 rounded-full
+            absolute -right-32 top-20
+            h-72 w-72
+            rounded-full
             bg-emerald-900/5
             blur-3xl
+            sm:-right-40 sm:h-96 sm:w-96
             dark:bg-emerald-400/5
           "
         />
 
         <div
           className="
-            absolute -left-40 bottom-10
-            h-96 w-96 rounded-full
+            absolute -left-32 bottom-10
+            h-72 w-72
+            rounded-full
             bg-amber-500/5
             blur-3xl
+            sm:-left-40 sm:h-96 sm:w-96
             dark:bg-amber-400/5
           "
         />
@@ -43,9 +47,12 @@ function Hero() {
         <div
           className="
             absolute right-0 top-0
-            h-full w-1/3
-            opacity-[0.035]
-            dark:opacity-[0.04]
+            h-full
+            w-full
+            opacity-[0.025]
+            sm:w-1/2
+            lg:w-1/3
+            dark:opacity-[0.03]
           "
           style={{
             backgroundImage: `
@@ -55,52 +62,60 @@ function Hero() {
               linear-gradient(150deg, #064e3b 12%, transparent 12.5%, transparent 87%, #064e3b 87.5%, #064e3b),
               linear-gradient(60deg, #064e3b 25%, transparent 25.5%, transparent 75%, #064e3b 75%)
             `,
-            backgroundSize: "80px 140px",
+            backgroundSize: "60px 105px",
           }}
         />
       </div>
 
       <div
         className="
-          relative mx-auto flex min-h-[calc(100vh-7rem)]
-          max-w-7xl items-center
-          px-6 py-16
+          relative mx-auto
+          flex min-h-[calc(100vh-6rem)]
+          max-w-7xl
+          items-center
+          px-4 py-12
+          sm:px-6 sm:py-16
           lg:px-8
         "
       >
-        <div className="grid w-full items-center gap-14 lg:grid-cols-2">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-14">
           {/* Text */}
-          <div className="max-w-2xl">
+          <div className="w-full max-w-2xl">
             {/* Badge */}
             <div
               className="
-                mb-6 inline-flex items-center gap-2
+                mb-5
+                inline-flex max-w-full
+                items-center gap-2
                 rounded-full
                 border border-emerald-900/10
                 bg-white/70
-                px-4 py-2
-                text-sm font-medium
+                px-3 py-2
+                text-xs font-semibold
                 text-emerald-900
                 shadow-sm
                 backdrop-blur
+                sm:mb-6 sm:px-4 sm:text-sm
                 dark:border-emerald-400/10
                 dark:bg-slate-900/60
                 dark:text-emerald-300
               "
             >
-              <Sparkles size={15} />
+              <Sparkles size={14} className="shrink-0 sm:h-4 sm:w-4" />
 
               <span>دليلك لفهم صلاة المسافر</span>
             </div>
 
             {/* Heading */}
-            <h2
+            <h1
               className="
-                text-5xl font-extrabold
-                leading-[1.2]
+                text-4xl
+                font-extrabold
+                leading-[1.25]
                 tracking-tight
                 text-slate-900
-                sm:text-6xl
+                sm:text-5xl
+                md:text-6xl
                 lg:text-7xl
                 dark:text-white
               "
@@ -111,15 +126,20 @@ function Hero() {
               <span className="text-emerald-900 dark:text-emerald-400">
                 اعرف كيف تصلي.
               </span>
-            </h2>
+            </h1>
 
             {/* Description */}
             <p
               className="
-                mt-7 max-w-xl
-                text-lg leading-9
+                mt-5
+                max-w-xl
+                text-base
+                leading-8
                 text-slate-600
-                sm:text-xl
+                sm:mt-7
+                sm:text-lg
+                sm:leading-9
+                lg:text-xl
                 dark:text-slate-300
               "
             >
@@ -129,15 +149,28 @@ function Hero() {
             </p>
 
             {/* Buttons */}
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div
+              className="
+                mt-7
+                grid
+                gap-3
+                sm:mt-9
+                sm:flex
+                sm:flex-row
+              "
+            >
               <a
-                href="travel-checker"
+                href="/#travel-checker"
                 className="
-                  group flex items-center
-                  justify-center gap-3
+                  group
+                  flex min-h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-3
                   rounded-2xl
                   bg-emerald-900
-                  px-7 py-4
+                  px-6 py-3.5
                   text-base font-bold
                   text-white
                   shadow-xl
@@ -146,6 +179,8 @@ function Hero() {
                   hover:-translate-y-1
                   hover:bg-emerald-800
                   hover:shadow-2xl
+                  sm:w-auto
+                  sm:px-7 sm:py-4
                 "
               >
                 <span>أنا مسافر الآن</span>
@@ -160,14 +195,17 @@ function Hero() {
               </a>
 
               <a
-                href="guide"
+                href="/guide"
                 className="
-                  flex items-center
-                  justify-center gap-2
+                  flex min-h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
                   rounded-2xl
                   border border-slate-200
                   bg-white/70
-                  px-7 py-4
+                  px-6 py-3.5
                   text-base font-semibold
                   text-slate-700
                   shadow-sm
@@ -176,6 +214,8 @@ function Hero() {
                   hover:-translate-y-1
                   hover:border-emerald-200
                   hover:text-emerald-900
+                  sm:w-auto
+                  sm:px-7 sm:py-4
                   dark:border-slate-700
                   dark:bg-slate-900/60
                   dark:text-slate-200
@@ -191,14 +231,24 @@ function Hero() {
             {/* Trust */}
             <div
               className="
-                mt-9 flex items-center gap-3
-                text-sm text-slate-500
+                mt-7
+                flex
+                items-start
+                gap-3
+                text-xs
+                leading-6
+                text-slate-500
+                sm:mt-9
+                sm:items-center
+                sm:text-sm
                 dark:text-slate-400
               "
             >
               <div
                 className="
-                  flex h-9 w-9 items-center justify-center
+                  flex h-9 w-9
+                  shrink-0
+                  items-center justify-center
                   rounded-full
                   bg-emerald-100
                   text-emerald-800
@@ -233,7 +283,8 @@ function Hero() {
               <div
                 className="
                   absolute inset-8
-                  flex flex-col items-center
+                  flex flex-col
+                  items-center
                   justify-center
                   overflow-hidden
                   rounded-[3rem]
@@ -260,7 +311,8 @@ function Hero() {
                 {/* Icon */}
                 <div
                   className="
-                    relative flex h-28 w-28
+                    relative
+                    flex h-28 w-28
                     items-center justify-center
                     rounded-full
                     bg-emerald-900
@@ -273,19 +325,21 @@ function Hero() {
                   <BookOpen size={48} strokeWidth={1.5} />
                 </div>
 
-                <h3
+                <h2
                   className="
-                    mt-8 text-2xl font-bold
+                    mt-8
+                    text-2xl font-bold
                     text-slate-900
                     dark:text-white
                   "
                 >
                   صلاة المسافر
-                </h3>
+                </h2>
 
                 <p
                   className="
-                    mt-2 text-center
+                    mt-2
+                    text-center
                     text-sm leading-7
                     text-slate-500
                     dark:text-slate-400
@@ -362,12 +416,14 @@ function Hero() {
       {/* Bottom fade */}
       <div
         className="
+          pointer-events-none
           absolute bottom-0 right-0 left-0
-          h-24
+          h-16
           bg-gradient-to-t
           from-[#f8f7f2]
           to-transparent
-          dark:from-slate-950 
+          sm:h-24
+          dark:from-slate-950
         "
       />
     </section>
