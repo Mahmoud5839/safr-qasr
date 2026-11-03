@@ -160,7 +160,7 @@ function Hero() {
               "
             >
               <a
-                href="/#travel-checker"
+                href="/travel-checker"
                 className="
                   group
                   flex min-h-12
